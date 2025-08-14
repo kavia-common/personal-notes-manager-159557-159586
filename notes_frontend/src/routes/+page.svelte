@@ -1,19 +1,13 @@
-<svelte:head>
-    <title>notes_frontend</title>
-</svelte:head>
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import { isAuthenticated } from '$lib/stores/auth';
+  import { goto } from '$app/navigation';
 
-<div class="container">
-    <p>notes_frontend is being generated</p>
-</div>
-
-<style>
-    .container {
-        text-align: center;
+  onMount(() => {
+    if (isAuthenticated()) {
+      goto('/notes');
+    } else {
+      goto('/login');
     }
-
-    p {
-        margin: 0;
-        font-size: 2rem;
-        color: var(--color-text-primary);
-    }
-</style>
+  });
+</script>
